@@ -1,0 +1,519 @@
+<ion-content>
+  @if (pokemon.value(); as pokemon) { @let type = pokemon.types[0].type.name;
+  <div class="upper-bg" [appTypeBackground]="type"></div>
+
+  <ion-toolbar class="mt-8 px-2 pt-2 text-[var(--primary-color)]">
+    <div
+      slot="start"
+      class="w-[3rem] h-[3rem] rounded-full flex items-center justify-center"
+      appRipple
+      appRippleTW
+    >
+      <ion-icon
+        name="chevron-back-outline"
+        class="text-[2rem] hover:cursor-pointer"
+        routerLink="/pokedex"
+      ></ion-icon>
+    </div>
+    <div
+      slot="end"
+      class="w-[3rem] h-[3rem] rounded-full flex items-center justify-center"
+      appRipple
+      appRippleTW
+    >
+      <ion-icon
+        name="heart-outline"
+        class="text-[2rem] hover:cursor-pointer"
+      ></ion-icon>
+    </div>
+  </ion-toolbar>
+
+  <ion-toolbar class="px-4 pt-0 text-[var(--primary-color)]">
+    <h1 slot="start" class="text-[1.5rem] font-bold">
+      {{ name.value() | undash }}
+    </h1>
+    <h2 slot="end" class="text-[1.25rem]">{{ "#" + pokemon.id }}</h2>
+  </ion-toolbar>
+
+  <div class="absolute right-[0.5rem] flex flex-col gap-y-[0.25rem]">
+    <ion-button
+      class="text-[var(--primary-color)]"
+      shape="round"
+      [disabled]="isCryPlaying()"
+      (click)="TTSDescription()"
+    >
+      <ion-icon
+        slot="icon-only"
+        [name]="isAudioPlaying() ? 'pause' : 'play'"
+      ></ion-icon>
+    </ion-button>
+
+    <ion-button
+      class="text-[var(--primary-color)]"
+      shape="round"
+      [disabled]="isAudioPlaying()"
+      (click)="playPokemonCry()"
+    >
+      <ion-icon slot="icon-only" [name]="cryIcon()"></ion-icon>
+    </ion-button>
+
+    <ion-button
+      class="text-[var(--primary-color)]"
+      shape="round"
+      (click)="handleShinyClick()"
+    >
+      <ion-icon slot="icon-only" [name]="shinyIcon()"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div class="h-[200px] lg:h-[300px]">
+    <img [src]="sprite()" class="h-full mx-auto" />
+  </div>
+
+  <div class="flex justify-evenly flex-wrap gap-x-4 gap-y-4 my-4">
+    <div class="max-w-[600px] w-full flex flex-wrap">
+      <div
+        class="h-fit px-4 w-full flex flex-wrap gap-y-4"
+        [class.max-w-600]="moves.value().length > 0"
+      >
+        <div
+          class="w-full h-fit my-4 flex flex-col items-center gap-y-4 max-w-[600px]"
+        >
+          <div
+            class="flex justify-center items-center gap-x-[2rem] types-container"
+          >
+            <div
+              class="type"
+              [appTypeBackground]="type"
+              appTypeColor="primary-color"
+            >
+              {{ 'types.' + type | translate | undash }}
+            </div>
+            @if (pokemon.types.length > 1) {
+            <div
+              class="type"
+              [appTypeBackground]="pokemon.types[1].type.name"
+              appTypeColor="primary-color"
+            >
+              {{ 'types.' + pokemon.types[1].type.name | translate | undash }}
+            </div>
+            }
+          </div>
+
+          <div
+            class="flex justify-center items-center gap-x-[2rem] mt-4 mx-auto"
+          >
+            <div class="flex gap-x-[0.5rem]">
+              <ion-icon
+                slot="start"
+                name="male"
+                class="text-[1.5rem]"
+                appTypeColor="water"
+              ></ion-icon>
+              {{ gender().male + '%' }}
+            </div>
+            <div class="flex gap-x-[0.5rem]">
+              <ion-icon
+                slot="start"
+                name="female"
+                class="text-[1.5rem]"
+                appTypeColor="psychic"
+              ></ion-icon>
+              {{ gender().female + '%' }}
+            </div>
+          </div>
+
+          <div class="flex justify-center items-center gap-x-4 mt-4">
+            <div class="info border-r-2" [appTypeBorder]="type" slot="start">
+              <h3 [appTypeColor]="type">{{ (genus() | undash) }}</h3>
+              <p>{{ 'pages.detail.pokemon' | translate }}</p>
+            </div>
+            <div class="info" [appTypeBorder]="type">
+              <h3 [appTypeColor]="type">{{ (height() | undash) + "m" }}</h3>
+              <p>{{ "pages.detail.height" | translate }}</p>
+            </div>
+            <div class="info border-l-2" [appTypeBorder]="type" slot="end">
+              <h3 [appTypeColor]="type">{{ (weight() | undash) + "Kg" }}</h3>
+              <p>{{ "pages.detail.weight" | translate }}</p>
+            </div>
+          </div>
+
+          <div class="text-center mt-4 mx-auto">
+            <h2 class="text-[1.25rem] font-semibold" [appTypeColor]="type">
+              {{ "pages.detail.abilities" | translate }}
+            </h2>
+            <div
+              class="min-h-[20px] flex justify-center items-center flex-wrap gap-y-2 mt-2"
+            >
+              @for (ability of abilities.value(); track ability.name) {
+              <div
+                (click)="handleAbilityClick(ability)"
+                class="info hover:cursor-pointer"
+                appRipple
+                appRippleTW
+                [appTypeBorder]="type"
+                [class.rounded-l-lg]="$first"
+                [class.rounded-r-lg]="$last"
+                [class.border-r-2]="
+              ($index === 0 || $index % 3 === 0) && abilities.value().length > 1
+              "
+                [class.border-l-2]="($index + 1) % 3 === 0"
+                slot="start"
+              >
+                <h3 [appTypeColor]="type">{{ ability.name | undash }}</h3>
+              </div>
+              } @empty {
+              <h3 class="mt-2 text-[var(--secondary-color)]">
+                {{ propertyNotFound }}
+              </h3>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="w-full h-fit my-8 xl:my-0 max-w-[600px] flex flex-col items-center gap-y-4"
+        >
+          <div class="text-center">
+            <h2 class="text-[1.25rem] font-semibold" [appTypeColor]="type">
+              {{ 'pages.detail.evolution_chain' | translate }}
+            </h2>
+            <div
+              class="flex justify-center items-center flex-wrap gap-y-4 mt-2 px-2"
+            >
+              @for (evo of evolutions.value(); track evo.evolutions.species.id)
+              {
+              <div
+                class="relative cursor-pointer rounded-lg"
+                appRipple
+                appRippleTW
+                [routerLink]="['/pokedex/', evo.evolutions.species.id]"
+              >
+                @if (!$first) {
+                <div class="absolute top-6 left-[-0.5rem]">
+                  <div class="flex items-center arrow">
+                    <div class="relative left-[2px] square">
+                      <div
+                        class="absolute top-[-12px] flex flex-col text-[0.75rem] font-semibold text-center"
+                      >
+                        <!-- @if ( evo.evolutions.details.length) {
+                        <div>{{ 'pages.detail.lv' | translate }}</div>
+                        <div class="absolute top-[12px]">
+                          {{ evo.evolutions.details[0].min_level }}
+                        </div>
+                        } -->
+                      </div>
+                    </div>
+                    <div class="triangle"></div>
+                  </div>
+                </div>
+                }
+                <div class="min-w-[114px] h-[4rem]">
+                  <img
+                    [src]="evo.evolutions.sprites.default"
+                    class="h-full mx-auto"
+                  />
+                </div>
+                <div
+                  class="info"
+                  [appTypeBorder]="type"
+                  [class.border-r-2]="
+                ($index === 0 || $index % 3 === 0) && evolutions.value().length > 1
+                "
+                  [class.border-l-2]="($index + 1) % 3 === 0"
+                  slot="start"
+                >
+                  <h3 [appTypeColor]="type">
+                    {{ evo.evolutions.species.name | undash }}
+                  </h3>
+                  <p>
+                    {{ "#" + evo.evolutions.species.id.toString() | undash }}
+                  </p>
+                </div>
+              </div>
+              } @empty {
+              <h3 class="mt-2 text-[var(--secondary-color)]">
+                {{ propertyNotFound }}
+              </h3>
+              }
+            </div>
+          </div>
+
+          <div class="text-center">
+            <h2 class="text-[1.25rem] font-semibold" [appTypeColor]="type">
+              {{ 'pages.detail.varieties' | translate }}
+            </h2>
+            <div
+              class="flex justify-center items-center flex-wrap gap-y-4 mt-2 px-2"
+            >
+              @for (vrt of varieties(); track vrt.id) {
+              <div
+                class="relative cursor-pointer rounded-lg"
+                appRipple
+                appRippleTW
+                [routerLink]="['/pokedex/', vrt.id]"
+              >
+                <div class="min-w-[114px] h-[4rem]">
+                  <img
+                    [src]="vrt.sprites.other['official-artwork'].front_default"
+                    alt=""
+                    class="h-full mx-auto"
+                  />
+                </div>
+                <div
+                  class="info"
+                  [appTypeBorder]="type"
+                  [class.border-r-2]="
+                ($index === 0 || $index % 3 === 0) && varieties().length > 1
+                "
+                  [class.border-l-2]="($index + 1) % 3 === 0"
+                  slot="start"
+                >
+                  <h3 [appTypeColor]="type">{{ vrt.name | undash }}</h3>
+                  <p>{{ "#" + vrt.id.toString() | undash }}</p>
+                </div>
+              </div>
+              } @empty {
+              <h3 class="mt-2 text-[var(--secondary-color)]">
+                {{ propertyNotFound }}
+              </h3>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="w-full h-fit text-center my-4 text-[var(--secondary-color)] max-w-[600px]"
+        >
+          <h2 class="mb-4 font-semibold" [appTypeColor]="type">
+            {{ "pages.detail.stats" | translate }}
+          </h2>
+          @for (stat of pokemon.stats; track stat.stat.name) {
+          <div class="flex items-center">
+            <div
+              class="min-w-[4rem] max-w-[4rem] text-left border-r-2"
+              [appTypeBorder]="type"
+            >
+              {{ stat.stat.name | mapstat }}
+            </div>
+            <div class="min-w-[60px] px-2">{{ stat.base_stat.toString() }}</div>
+            <ion-progress-bar
+              [value]="stat.base_stat / 255"
+              class="min-w-[200px] h-[0.5rem] rounded-full"
+              [appTypeProgressBar]="type"
+            ></ion-progress-bar>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    @if (moves.value().length > 0) {
+
+    <div class="px-4 text-center max-w-[600px] w-full">
+      <h2 class="font-semibold" [appTypeColor]="type">
+        {{ "pages.detail.moves" | translate }}
+      </h2>
+
+      <div
+        class="my-2 flex justify-between items-center border-b-2"
+        [appTypeBorder]="type"
+      >
+        <h3 class="text-left !text-[1rem] font-semibold" [appTypeColor]="type">
+          {{ "pages.detail.breeding" | translate }}
+        </h3>
+        <ion-icon
+          name="egg"
+          class="text-[1.5rem]"
+          [appTypeColor]="type"
+        ></ion-icon>
+      </div>
+      <div class="my-4" [class]="eggMoves().length > 0 ? 'moves' : ''">
+        @for (move of eggMoves(); track move.name) {
+        <div
+          appRipple
+          appRippleTW
+          [appTypeBackground]="move.type"
+          class="move"
+          (click)="handleMoveClick(move)"
+        >
+          <h4 class="font-semibold" [appThreshold]="charactersThreshold">
+            {{ move.name | undash }}
+          </h4>
+        </div>
+        } @empty {
+        <div class="my-4 text-center text-[var(--secondary-color)]">
+          <p>{{ propertyNotFound }}</p>
+        </div>
+        }
+      </div>
+
+      <div
+        class="my-2 flex justify-between items-center border-b-2"
+        [appTypeBorder]="type"
+      >
+        <h3 class="text-left !text-[1rem] font-semibold" [appTypeColor]="type">
+          {{ "pages.detail.level_up" | translate }}
+        </h3>
+        <ion-icon
+          name="barbell"
+          class="text-[1.5rem]"
+          [appTypeColor]="type"
+        ></ion-icon>
+      </div>
+      <div
+        class="my-4"
+        [class]="
+          levelupMoves().length > 0 ? 'moves' : ''
+          "
+      >
+        @for (move of levelupMoves(); track move.name) {
+        <div
+          appRipple
+          appRippleTW
+          [appTypeBackground]="move.type"
+          class="move"
+          (click)="handleMoveClick(move)"
+        >
+          <h4 class="font-semibold" [appThreshold]="charactersThreshold">
+            {{ move.name | undash }}
+          </h4>
+        </div>
+        } @empty {
+        <div class="my-4 text-center text-[var(--secondary-color)]">
+          <p>{{ propertyNotFound }}</p>
+        </div>
+        }
+      </div>
+
+      <div
+        class="my-2 flex justify-between items-center border-b-2"
+        [appTypeBorder]="type"
+      >
+        <h3 class="text-left !text-[1rem] font-semibold" [appTypeColor]="type">
+          {{ "pages.detail.tm_hm" | translate }}
+        </h3>
+        <div class="TM flex justify-center items-center">
+          <div class="inner-TM"></div>
+        </div>
+      </div>
+      <div class="my-4" [class]="TMMoves().length > 0 ? 'moves' : ''">
+        @for (move of TMMoves(); track move.name) {
+        <div
+          appRipple
+          appRippleTW
+          [appTypeBackground]="move.type"
+          class="move"
+          (click)="handleMoveClick(move)"
+        >
+          <h4 class="font-semibold" [appThreshold]="charactersThreshold">
+            {{ move.name | undash }}
+          </h4>
+        </div>
+        } @empty {
+        <div class="my-4 text-center text-[var(--secondary-color)]">
+          <p>{{ propertyNotFound }}</p>
+        </div>
+        }
+      </div>
+      <div
+        class="my-2 flex justify-between items-center border-b-2"
+        [appTypeBorder]="type"
+      >
+        <h3 class="text-left !text-[1rem] font-semibold" [appTypeColor]="type">
+          {{ "pages.detail.tutor" | translate }}
+        </h3>
+        <ion-icon
+          name="school"
+          class="text-[1.5rem]"
+          [appTypeColor]="type"
+        ></ion-icon>
+      </div>
+      <div
+        class="my-4"
+        [class]="
+          tutorMoves().length > 0 ? 'moves' : ''
+        "
+      >
+        @for (move of tutorMoves(); track move.name) {
+        <div
+          appRipple
+          appRippleTW
+          class="move"
+          [appTypeBackground]="move.type"
+          (click)="handleMoveClick(move)"
+        >
+          <h4 class="font-semibold" [appThreshold]="charactersThreshold">
+            {{ move.name | undash }}
+          </h4>
+        </div>
+
+        } @empty {
+        <div class="my-4 text-center text-[var(--secondary-color)]">
+          <p>{{ propertyNotFound }}</p>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!--   <ion-toolbar class="next-prev">
+  <div
+  slot="start"
+  class="w-[2rem] h-[2rem] rounded-full flex items-center justify-center"
+  appRipple
+  appRippleTW
+  [routerLink]="['/pokedex/', previous()?.id]"
+  >
+  <ion-icon
+  name="chevron-back-outline"
+  class="text-[1.5rem]"
+  [appTypeColor]="type"
+  ></ion-icon>
+</div>
+<div
+slot="start"
+appRipple
+appRippleTW
+[routerLink]="['/pokedex/', previous()?.id]"
+class="rounded-[10px]"
+>
+<img [src]="previous()?.icon" class="min-h-[56px] min-w-[68px]" />
+      <p class="text-center text-[var(--secondary-color)]">
+        {{ '#' + previous()?.id }}
+      </p>
+    </div>
+    <div slot="end" appRipple appRippleTW class="bg-[red] rounded-[10px]">
+      <img [src]="next()?.icon" class="min-h-[56px] min-w-[68px]" />
+      <p class="text-center text-[var(--secondary-color)]">
+        {{ '#' + next()?.id }}
+      </p>
+    </div>
+    <div
+    slot="end"
+    class="w-[2rem] h-[2rem] rounded-full flex items-center justify-center"
+    appRipple
+    appRippleTW
+    [routerLink]="['/pokedex/', next()?.id]"
+    >
+    <ion-icon
+    name="chevron-forward-outline"
+    class="text-[1.5rem]"
+    [appTypeColor]="type"
+    ></ion-icon>
+  </div>
+</ion-toolbar> -->
+
+    <!--   <div
+appRipple
+appRippleTW
+class="w-[500px] h-[200px] bg-[red] rounded-[10px]"
+>
+<img [src]="previous()?.icon" class="min-h-[56px] min-w-[68px]" />
+<p class="text-center text-[var(--secondary-color)]">
+  {{ '#' + previous()?.id }}
+</p>
+</div> -->
+    }
+  </div>
+  }
+</ion-content>

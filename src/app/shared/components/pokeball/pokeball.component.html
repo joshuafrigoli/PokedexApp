@@ -1,0 +1,18 @@
+<div
+  class="pokeball"
+  [class]="additionalClasses()"
+  [appTypeBackground]="type()"
+>
+  <div
+    class="line"
+    [appTypeBackground]="secondaryColor()"
+    [appTypeLightenPercentage]="lightenPercentage()"
+  ></div>
+  <div
+    class="outer-center"
+    [appTypeBackground]="secondaryColor()"
+    [appTypeLightenPercentage]="lightenPercentage()"
+  >
+    <div class="inner-center" [appTypeBackground]="type()"></div>
+  </div>
+</div>

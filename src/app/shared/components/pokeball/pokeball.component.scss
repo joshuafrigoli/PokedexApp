@@ -1,0 +1,35 @@
+.pokeball {
+  position: absolute;
+  z-index: -1;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+
+  .line {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150%;
+    height: 20px;
+  }
+
+  .outer-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    .inner-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  }
+}

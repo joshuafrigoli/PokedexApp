@@ -1,0 +1,9 @@
+<ion-searchbar
+  [(ngModel)]="value"
+  [placeholder]="placeholder()"
+  [debounce]="debounceTime()"
+  class="app-searchbar"
+  [class]="cssClass()"
+  (ionInput)="emitValue()"
+  (keyup.enter)="emitValue()"
+></ion-searchbar>

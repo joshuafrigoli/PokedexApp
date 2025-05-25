@@ -1,0 +1,79 @@
+<div
+  class="p-4 flex justify-between items-center relative text-[var(--secondary-color)]"
+>
+  <h1 class="font-semibold">{{ "title.app" | translate }}</h1>
+  <ion-menu-toggle class="w-[2rem] h-[2rem] hover:cursor-pointer">
+    <ion-icon name="menu" class="text-[2rem]"></ion-icon>
+  </ion-menu-toggle>
+  <div class="absolute right-[-0.5rem] top-[-3.45rem]">
+    <app-pokeball
+      type="contrast-color"
+      [lightenPercentage]="10"
+      additionalClasses="right-0"
+    ></app-pokeball>
+  </div>
+</div>
+<ion-toolbar>
+  <app-search-bar
+    [placeholder]="'searchbar.placeholder.home' | translate"
+    [(value)]="inputValue"
+    (onInput)="handleSearchBarOnInput($event)"
+    (keyup.enter)="handleSearchSuggestionEnter($event)"
+    (keydown.arrowUp)="handleSearchSuggestionArrowUp($event)"
+    (keydown.arrowDown)="handleSearchSuggestionArrowDown($event)"
+    (focusout)="handleFocusOut()"
+  ></app-search-bar>
+</ion-toolbar>
+
+<div
+  class="px-4 absolute z-10 w-full bg-[var(--primary-color)]"
+  [class.show]="searchSuggestions().length > 0"
+>
+  @for (pokemon of searchSuggestions(); track pokemon.name) {
+  <div
+    (click)="handleSearchSuggestionClick(pokemon.id)"
+    class="item flex items-center border-b-[1px] border-[var(--secondary-contrast-color)]"
+    [class.active]="activeSearchSuggestion() === pokemon.id"
+  >
+    <div class="poke-icon">
+      @if (pokemon.icon) {
+      <img [src]="pokemon.icon" />
+      }
+    </div>
+    {{ pokemon.name }}
+  </div>
+  }
+</div>
+
+<div class="mt-2 p-2">
+  <ion-grid>
+    <ion-row>
+      @for (pokemon of pokedex(); track pokemon.id) {
+      <ion-col
+        #child
+        size="6"
+        size-sm="4"
+        size-lg="2"
+        size-xl="2"
+        class="p-[0.25rem]"
+        ><app-card
+          [customPokemon]="pokemon"
+          (onCardClick)="handleOnCardClick($event)"
+        ></app-card>
+      </ion-col>
+      }
+
+      <ion-infinite-scroll
+        (ionInfinite)="onScroll($event)"
+        threshold="50%"
+        [disabled]="isEndOfPokedex()"
+      >
+        @if (!isEndOfPokedex()) {
+        <ion-infinite-scroll-content
+          loadingSpinner="crescent"
+        ></ion-infinite-scroll-content>
+        }
+      </ion-infinite-scroll>
+    </ion-row>
+  </ion-grid>
+</div>

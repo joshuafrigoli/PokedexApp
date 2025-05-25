@@ -1,0 +1,26 @@
+.types-container {
+  width: fit-content;
+}
+
+.type {
+  min-width: 70px; //70px
+  padding: 0 0.5rem;
+  height: 1.5rem;
+  border-radius: 4rem;
+  text-align: center;
+  align-content: center;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 568px) {
+  .type {
+    min-width: 100px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #000;
+    --secondary-color: #fff;
+  }
+}

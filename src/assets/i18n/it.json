@@ -1,0 +1,83 @@
+{
+  "title": {
+    "app": "Pokédex"
+  },
+  "searchbar": {
+    "placeholder": {
+      "home": "Cerca pokémon per nome o id..."
+    }
+  },
+  "toast": {
+    "message": {
+      "no_pokemon": "Non ci sono pokémon disponibili",
+      "pokemon_not_found": "Pokémon non trovato."
+    },
+    "button": {
+      "cancel": "Ok"
+    }
+  },
+  "select": {
+    "all": "Tutti",
+    "pokedex": "Pokédex",
+    "type": "Tipo"
+  },
+  "modal": {
+    "ability": {
+      "hidden": "Nascosta"
+    },
+    "move": {
+      "category": "Categoria",
+      "power": "Potenza",
+      "accuracy": "Precisione",
+      "type": "Tipo",
+      "level": "Livello",
+      "pp": "PP",
+      "description": "Descrizione"
+    }
+  },
+  "pages": {
+    "detail": {
+      "pokemon": "Pokémon",
+      "height": "Altezza",
+      "weight": "Peso",
+      "abilities": "Abilità",
+      "evolution_chain": "Catena Evolutiva",
+      "lv": "Lv.",
+      "varieties": "Altre Forme",
+      "stats": "Statistiche",
+      "moves": "Mosse",
+      "breeding": "Uovo",
+      "level_up": "Tramite Livelli",
+      "tm_hm": "MT e MN",
+      "tutor": "Tutor Mosse"
+    }
+  },
+  "types": {
+    "normal": "normale",
+    "fire": "fuoco",
+    "water": "acqua",
+    "electric": "elettro",
+    "grass": "erba",
+    "ice": "ghiaccio",
+    "fighting": "lotta",
+    "poison": "veleno",
+    "ground": "terra",
+    "flying": "volante",
+    "psychic": "psico",
+    "bug": "coleottero",
+    "rock": "roccia",
+    "ghost": "spettro",
+    "dragon": "drago",
+    "dark": "buio",
+    "steel": "acciaio",
+    "fairy": "folletto"
+  },
+  "stats": {
+    "hp": "P. V.",
+    "attack": "ATT.",
+    "defense": "DIF.",
+    "special_attack": "ATT. SP.",
+    "special_defense": "DIF. SP.",
+    "speed": "VEL."
+  }
+}

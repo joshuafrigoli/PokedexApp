@@ -1,0 +1,11 @@
+@if (ability) {
+<div class="p-4">
+  <h3 class="text-center">
+    {{ ability.name | undash }}
+    {{
+      ability.is_hidden ? "(" + ("modal.ability.hidden" | translate) + ")" : ""
+    }}
+  </h3>
+  <p class="pt-2 text-center">{{ ability.description }}</p>
+</div>
+}

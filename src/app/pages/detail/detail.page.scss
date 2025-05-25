@@ -1,0 +1,83 @@
+.upper-bg {
+  width: 700px;
+  height: 700px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.info {
+  padding: 0 1rem;
+  text-align: center;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+ion-toolbar {
+  --background: transparent;
+
+  &.next-prev {
+    --min-height: 28px;
+    margin: 1.5rem 0;
+    padding: 0.5rem 1rem;
+    color: var(--primary-color);
+  }
+}
+
+.moves {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  column-gap: 17px;
+  row-gap: 1rem;
+
+  .move {
+    min-height: 3rem;
+    border-radius: 1.25rem;
+    align-content: center;
+    padding: 0 0.25rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    h4 {
+      line-height: 1.5rem;
+      color: var(--primary-color);
+    }
+  }
+}
+
+.TM {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-image: conic-gradient(
+    rgb(221, 221, 221),
+    rgb(255, 204, 248),
+    rgb(179, 179, 179),
+    rgb(192, 192, 192),
+    rgb(175, 240, 229),
+    rgb(179, 179, 179),
+    rgb(221, 221, 221)
+  );
+
+  .inner-TM {
+    background: var(--primary-color);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .upper-bg {
+    width: 100%;
+    border-radius: 0 0 100px 100px;
+  }
+}

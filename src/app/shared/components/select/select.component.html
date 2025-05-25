@@ -1,0 +1,12 @@
+<ion-select
+  [interface]="selectOptions().interface"
+  [fill]="selectOptions().fill"
+  [label]="selectOptions().label"
+  [labelPlacement]="selectOptions().labelPlacement"
+  [(ngModel)]="selectedOption"
+  (ionChange)="handleSelectChange()"
+>
+  @for (option of optionsArray(); track option) {
+  <ion-select-option [value]="option">{{ option | undash }}</ion-select-option>
+  }
+</ion-select>

@@ -1,0 +1,51 @@
+@if (customPokemon(); as pokemon) {
+
+<ion-card
+  (click)="handleOnCardClick()"
+  class="m-0 p-[0.25rem] rounded-[20px] h-[160px] hover:cursor-pointer"
+  appRipple
+  appRippleTW
+  [appTypeBackground]="pokemon.types[0]"
+  [appTypeLightenPercentage]="lightenPercentage()"
+>
+  <ion-card-header class="p-2">
+    <h3
+      class="text-[1.25rem] font-semibold text-[var(--primary-color)] truncate text-ellipsis"
+    >
+      {{ pokemon.name | undash }}
+    </h3>
+  </ion-card-header>
+
+  <ion-card-content class="custom-content relative">
+    <div class="absolute top-0 z-1 types-container">
+      <div
+        class="type shadow-xl"
+        [appTypeBackground]="pokemon.types[0]"
+        appTypeColor="primary-color"
+      >
+        {{ "types." + pokemon.types[0] | translate | undash }}
+      </div>
+      @if (pokemon.types.length > 1) {
+      <div
+        class="type mt-2 shadow-xl"
+        [appTypeBackground]="pokemon.types[1]"
+        appTypeColor="primary-color"
+      >
+        {{ "types." + pokemon.types[1] | translate | undash }}
+      </div>
+      }
+    </div>
+
+    <div class="min-h-[100px] w-[100px] absolute right-0">
+      <app-pokeball
+        [type]="pokemon.types[0]"
+        [lightenPercentage]="lightenPercentage()"
+        additionalClasses="top-[-20px] left-[-20px] rotate-[-10deg]"
+      ></app-pokeball>
+      @if (pokemon.sprites) {
+      <img class="h-full" [src]="pokemon.sprites.default" />
+      }
+    </div>
+  </ion-card-content>
+</ion-card>
+}

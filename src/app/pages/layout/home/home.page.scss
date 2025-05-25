@@ -1,0 +1,43 @@
+.item {
+  border-radius: 10px;
+  margin: 0.5rem 0;
+  border: 1px solid #f0f0f0;
+  &:hover {
+    cursor: pointer;
+    background: var(--contrast-color);
+  }
+
+  &.active {
+    background-color: var(--contrast-color);
+  }
+}
+
+.poke-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+
+  @keyframes pokemon-icon {
+    0% {
+      transform: translateY(-8px);
+    }
+    25% {
+      transform: translateY(-4px);
+    }
+    50% {
+      transform: translateY(0px);
+    }
+    75% {
+      transform: translateY(-4px);
+    }
+    100% {
+      transform: translateY(-8px);
+    }
+  }
+
+  img {
+    animation-name: pokemon-icon;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+  }
+}

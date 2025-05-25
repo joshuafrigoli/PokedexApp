@@ -1,0 +1,29 @@
+ion-select {
+  --ion-item-background: var(--primary-color);
+  --ion-background-color: var(--primary-color);
+  --background: var(--primary-color);
+  --border-width: 2px;
+  --highlight-color-valid: var(--tertiary-color);
+
+  &::part(label) {
+    color: var(--secondary-color);
+  }
+
+  &::part(container) {
+    color: var(--secondary-color);
+  }
+}
+
+ion-select-popover {
+  ion-list.list-md {
+    background: var(--primary-color);
+  }
+
+  ion-item {
+    --background: none;
+  }
+
+  ion-radio::part(label) {
+    color: var(--secondary-color);
+  }
+}

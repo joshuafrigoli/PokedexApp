@@ -1,0 +1,83 @@
+{
+  "title": {
+    "app": "Pokédex"
+  },
+  "searchbar": {
+    "placeholder": {
+      "home": "Search pokémon name or id..."
+    }
+  },
+  "toast": {
+    "message": {
+      "no_pokemon": "There are no pokémon available",
+      "pokemon_not_found": "Pokémon not found."
+    },
+    "button": {
+      "cancel": "Ok"
+    }
+  },
+  "select": {
+    "all": "All",
+    "pokedex": "Pokédex",
+    "type": "Type"
+  },
+  "modal": {
+    "ability": {
+      "hidden": "Hidden"
+    },
+    "move": {
+      "category": "Category",
+      "power": "Power",
+      "accuracy": "Accuracy",
+      "type": "Type",
+      "level": "Level",
+      "pp": "PP",
+      "description": "Description"
+    }
+  },
+  "pages": {
+    "detail": {
+      "pokemon": "Pokémon",
+      "height": "Height",
+      "weight": "Weight",
+      "abilities": "Abilities",
+      "evolution_chain": "Evolution Chain",
+      "lv": "Lv.",
+      "varieties": "Other Forms",
+      "stats": "Stats",
+      "moves": "Moves",
+      "breeding": "Breeding",
+      "level_up": "Level Up",
+      "tm_hm": "TM & HM",
+      "tutor": "Move Tutor"
+    }
+  },
+  "types": {
+    "normal": "normal",
+    "fire": "fire",
+    "water": "water",
+    "electric": "electric",
+    "grass": "grass",
+    "ice": "ice",
+    "fighting": "fighting",
+    "poison": "poison",
+    "ground": "ground",
+    "flying": "flying",
+    "psychic": "psychic",
+    "bug": "bug",
+    "rock": "rock",
+    "ghost": "ghost",
+    "dragon": "dragon",
+    "dark": "dark",
+    "steel": "steel",
+    "fairy": "fairy"
+  },
+  "stats": {
+    "hp": "HP",
+    "attack": "ATK",
+    "defense": "DEF",
+    "special_attack": "SP.ATK",
+    "special_defense": "SP.DEF",
+    "speed": "SPD"
+  }
+}

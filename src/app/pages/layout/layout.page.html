@@ -1,0 +1,42 @@
+<ion-menu side="end" contentId="main-content">
+  <ion-toolbar class="p-4">
+    <ion-icon
+      name="person"
+      slot="start"
+      class="text-[1.25rem] text-[var(--secondary-color)]"
+    />
+    <ion-menu-toggle
+      slot="end"
+      class="w-[1.5rem] h-[1.5rem] text-[var(--secondary-color)]"
+    >
+      <ion-icon name="close" class="text-[1.5rem] hover:cursor-pointer" />
+    </ion-menu-toggle>
+  </ion-toolbar>
+  <ion-content class="ion-padding">
+    <app-select
+      [selectOptions]="{ label: 'select.pokedex' | translate }"
+      [optionsArray]="pokedexes.value().names"
+      (onSelectChange)="handlePokedexChange($event)"
+    ></app-select>
+    <app-select
+      [selectOptions]="{ label: 'select.type' | translate }"
+      [optionsArray]="types.value().names"
+      (onSelectChange)="handleTypeChange($event)"
+    ></app-select>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-content [fullscreen]="true" #contentRef>
+    <app-home></app-home>
+  </ion-content>
+</div>
+
+<ion-fab class="fixed bottom-[0.5rem] right-[0.5rem]">
+  <ion-fab-button class="w-[2.5rem] h-[2.5rem]" (click)="scrollToTop()">
+    <ion-icon
+      name="arrow-up"
+      class="w-[1.25rem] h-[1.25rem] text-[var(--primary-color)]"
+    ></ion-icon>
+  </ion-fab-button>
+</ion-fab>

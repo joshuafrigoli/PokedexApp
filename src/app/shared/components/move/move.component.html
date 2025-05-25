@@ -1,0 +1,61 @@
+@if (move) {
+<div class="p-4 text-[var(--secondary-color)]">
+  <h3 class="text-center">
+    {{ move.name! | undash }}
+  </h3>
+  <div class="grid grid-cols-3 text-center mt-4">
+    <div>
+      <h4>{{ "modal.move.category" | translate }}</h4>
+      <img
+        [src]="'assets/images/' + move.damage_class + '_move.png'"
+        alt=""
+        class="h-[50px] mx-auto"
+      />
+    </div>
+    <div>
+      <h4>{{ "modal.move.power" | translate }}</h4>
+      <div class="h-[50px] content-center">
+        {{ move.power || propertyNotFound }}
+      </div>
+    </div>
+    <div>
+      <h4>{{ "modal.move.accuracy" | translate }}</h4>
+      <div class="h-[50px] content-center">
+        {{ move.accuracy || propertyNotFound }}
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-3 text-center mt-4">
+    <div>
+      <h4>{{ "modal.move.type" | translate }}</h4>
+      <div class="h-[50px] content-center">
+        <div
+          class="type w-fit mx-auto"
+          [appTypeBackground]="move.type"
+          appTypeColor="primary-color"
+        >
+          {{ "types." + move.type | translate | undash }}
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4>{{ "modal.move.level" | translate }}</h4>
+      <div class="h-[50px] content-center">
+        {{ move.level_learned_at || propertyNotFound }}
+      </div>
+    </div>
+    <div>
+      <h4>{{ "modal.move.pp" | translate }}</h4>
+      <div class="h-[50px] content-center">
+        {{ move.pp || propertyNotFound }}
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3 class="text-center">{{ "modal.move.description" | translate }}</h3>
+    <p class="text-center">
+      {{ move.description || propertyNotFound }}
+    </p>
+  </div>
+</div>
+}
