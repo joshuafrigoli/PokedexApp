@@ -73,7 +73,7 @@ Click on a Pokémon to see detailed information.
 
 🖼️ Screenshots
 
-![App Hoomepage](https://raw.githubusercontent.com/joshuafrigoli/PokedexApp/src/assets/images/screenshots/home.png)
+![App Hoomepage](https://raw.githubusercontent.com/joshuafrigoli/PokedexApp/src/assets/images/screenshots/app_screen_1.png)
 ![Pokémon Detail page](assets/images/screenshots/app_screen_2.png)
 ![Pokémon Detail page move](assets/images/screenshots/app_screen_3.png)
 ![Pokémon Detail page shiny](assets/images/screenshots/app_screen_4.png)
