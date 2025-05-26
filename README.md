@@ -10,6 +10,8 @@ TypeScript
 
 RxJS
 
+Ionic
+
 Angular CLI
 
 SCSS for styling
