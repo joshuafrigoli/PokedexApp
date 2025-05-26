@@ -71,7 +71,7 @@ Use the search bar to filter by name or id.
 
 Click on a Pokémon to see detailed information.
 
-🖼️ Screenshots
+# 🖼️ Screenshots
 
 ![App Hoomepage](/src/assets/images/screenshots/app_screen_1.png)
 ![Pokémon Detail page](/src/assets/images/screenshots/app_screen_2.png)
