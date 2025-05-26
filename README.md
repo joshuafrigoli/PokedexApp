@@ -1,6 +1,6 @@
 # PokedexApp
 
-PokedexApp is a web application built with Angular that displays Pokémon data from a public API. The app allows users to browse, search, and view detailed information about each Pokémon in a modern, responsive interface.
+**PokedexApp** is a web application built with Angular that displays Pokémon data from a public API. The app allows users to browse, search, and view detailed information about each Pokémon in a modern, responsive interface.
 
 ## 🛠️ Technologies & Libraries
 
